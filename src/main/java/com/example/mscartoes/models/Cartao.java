@@ -1,7 +1,11 @@
 package com.example.mscartoes.models;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,17 +17,17 @@ public class Cartao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "bandeira")
-    private String bandeira;
+    @Enumerated(EnumType.STRING)
+    private BandeiraCartao bandeiraCartao;
 
     @Column(name = "renda")
-    private Integer renda;
+    private BigDecimal renda;
 
-    @Column(name = "limite")
-    private Integer limite;
+    @Column(name = "limite_basico")
+    private BigDecimal limiteBasico;
 }

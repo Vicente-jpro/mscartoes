@@ -1,5 +1,6 @@
 package com.example.mscartoes.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class CartaoService {
 
     public Cartao geCartao(String bi) {
         return this.cartaoRepository.findAll().get(0);
+    }
+
+    public List<Cartao> getCartoesRendaMenorOrIgual(Long renda) {
+        BigDecimal valorRenda = BigDecimal.valueOf(renda);
+        return this.cartaoRepository.findByRendaLessThanEqual(valorRenda);
     }
 
     public List<Cartao> getCartoes() {

@@ -36,4 +36,10 @@ public class CartaoController {
     public List<Cartao> getCartoes() {
         return this.cartaoService.getCartoes();
     }
+
+    @GetMapping("/{renda}")
+    public List<Cartao> getCartoesRendaMenorOrIgual(@PathVariable("renda") Long renda) {
+
+        return this.cartaoService.getCartoesRendaMenorOrIgual(renda);
+    }
 }
