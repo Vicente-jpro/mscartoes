@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.mscartoes.dto.CartaoRequest;
 import com.example.mscartoes.models.Cartao;
 import com.example.mscartoes.repositories.CartaoRepository;
 
@@ -16,6 +17,7 @@ public class CartaoService {
     private CartaoRepository cartaoRepository;
 
     public Cartao salvar(Cartao cartao) {
+
         return this.cartaoRepository.save(cartao);
     }
 

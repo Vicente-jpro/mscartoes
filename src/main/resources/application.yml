@@ -1,6 +1,9 @@
 spring:
   application:
     name: mscartoes
+  jpa:
+    show-sql: true
+    generate-ddl: true
 
 server:
   port: 0 #Generate random port
