@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -24,9 +25,9 @@ import com.example.mscartoes.services.ClienteCartaoService;
 @RestController
 @RequestMapping("/clientes-cartao")
 // @CrossOrigin("http://localhost:4200")
-public class ClienteController {
+public class ClienteCartaoController {
 
-	private final Logger logger = Logger.getLogger(ClienteController.class.getName());
+	private final Logger logger = Logger.getLogger(ClienteCartaoController.class.getName());
 	@Autowired
 	private ClienteCartaoService clienteService;
 
@@ -80,6 +81,12 @@ public class ClienteController {
 	public ClienteCartao getCliente(@PathVariable("id_cliente") Integer IdCliente) {
 
 		return this.clienteService.getCliente(IdCliente);
+	}
+
+	@GetMapping(params = "bi")
+	@ResponseStatus(HttpStatus.OK)
+	public ClienteCartao getCliente(@RequestParam("bi") String bi) {
+		return this.clienteService.findByBi(bi);
 	}
 
 	@DeleteMapping("/{id_cliente}")

@@ -7,5 +7,5 @@ import com.example.mscartoes.models.ClienteCartao;
 
 @Repository
 public interface ClienteCartaoRepository extends JpaRepository<ClienteCartao, Integer> {
-
+    ClienteCartao findByBi(String bi);
 }

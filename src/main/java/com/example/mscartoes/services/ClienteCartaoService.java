@@ -26,6 +26,10 @@ public class ClienteCartaoService {
 						() -> new ClienteCartaoNotFoundException("Cliente não encontrado. Id invalido :" + idCliente));
 	}
 
+	public ClienteCartao findByBi(String bi) {
+		return this.clienteRepository.findByBi(bi);
+	}
+
 	public void eliminar(Integer idCliente) {
 		ClienteCartao cliente = this.getCliente(idCliente);
 		this.clienteRepository.delete(cliente);
