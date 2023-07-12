@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.mscartoes.enums.BandeiraCartao;
+
 import lombok.Data;
 
 @Data
