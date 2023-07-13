@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mscartoes.converters.CartaoConverter;
-import com.example.mscartoes.converters.ClienteCartaoConverter;
 import com.example.mscartoes.dto.CartaoDto;
 import com.example.mscartoes.models.Cartao;
 import com.example.mscartoes.services.CartaoService;
