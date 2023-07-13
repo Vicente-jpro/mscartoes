@@ -3,7 +3,6 @@ package com.example.mscartoes.converters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.mscartoes.dto.CartaoDto;
 import com.example.mscartoes.dto.ClienteCartaoDto;
 import com.example.mscartoes.models.Cartao;
 import com.example.mscartoes.models.ClienteCartao;
@@ -24,6 +23,18 @@ public class ClienteCartaoConverter {
         clienteCartao.setCartao(cartao);
 
         return clienteCartao;
+    }
+
+    public ClienteCartaoDto toDto(ClienteCartao clienteCartao) {
+
+        return ClienteCartaoDto
+                .builder()
+                .id(clienteCartao.getId())
+                .bi(clienteCartao.getBi())
+                .limite(clienteCartao.getLimite())
+                .cartao(cartaoConverter.toDto(clienteCartao.getCartao()))
+                .build();
+
     }
 
 }

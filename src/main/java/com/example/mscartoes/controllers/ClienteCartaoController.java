@@ -44,7 +44,7 @@ public class ClienteCartaoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ClienteCartao salvar(@RequestBody ClienteCartaoDto clienteCartaoDto) {
+	public ClienteCartaoDto salvar(@RequestBody ClienteCartaoDto clienteCartaoDto) {
 		logger.info("Salvando clienteReques ********");
 
 		Cartao cartao = cartaoConverter.toModel(clienteCartaoDto);
@@ -53,7 +53,8 @@ public class ClienteCartaoController {
 		ClienteCartao clienteCartao = clienteCartaoConverter.toModel(clienteCartaoDto);
 		clienteCartao.setCartao(cartao);
 
-		return this.clienteService.salvar(clienteCartao);
+		clienteCartao = this.clienteService.salvar(clienteCartao);
+		return this.clienteCartaoConverter.toDto(clienteCartao);
 	}
 
 	@GetMapping

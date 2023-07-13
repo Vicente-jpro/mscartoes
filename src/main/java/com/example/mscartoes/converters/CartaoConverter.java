@@ -28,4 +28,14 @@ public class CartaoConverter {
         cartao.setLimiteBasico(clienteCartaoDto.getCartao().getLimiteBasico());
         return cartao;
     }
+
+    public CartaoDto toDto(Cartao cartao) {
+        return CartaoDto.builder()
+                .id(cartao.getId())
+                .nome(cartao.getNome())
+                .bandeiraCartao(cartao.getBandeiraCartao())
+                .limiteBasico(cartao.getLimiteBasico())
+                .renda(cartao.getRenda())
+                .build();
+    }
 }
