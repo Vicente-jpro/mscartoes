@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Builder
 @Data
-public class CartaoRequest {
+public class CartaoDto {
 
     private Long id;
     private String nome;
@@ -18,13 +18,4 @@ public class CartaoRequest {
     private BigDecimal renda;
     private BigDecimal limiteBasico;
 
-    public Cartao toModel() {
-        Cartao cartao = new Cartao();
-        cartao.setId(id);
-        cartao.setBandeiraCartao(bandeiraCartao);
-        cartao.setNome(nome);
-        cartao.setRenda(renda);
-        cartao.setLimiteBasico(limiteBasico);
-        return cartao;
-    }
 }

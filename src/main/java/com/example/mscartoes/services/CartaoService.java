@@ -20,7 +20,7 @@ public class CartaoService {
         return this.cartaoRepository.save(cartao);
     }
 
-    public Cartao geCartao(String bi) {
+    public Cartao getCartao(String bi) {
         return this.cartaoRepository.findAll().get(0);
     }
 

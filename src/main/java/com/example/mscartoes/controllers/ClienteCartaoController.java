@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.mscartoes.dto.ClienteCartaoRequest;
+import com.example.mscartoes.converters.CartaoConverter;
+import com.example.mscartoes.converters.ClienteCartaoConverter;
+import com.example.mscartoes.dto.ClienteCartaoDto;
+import com.example.mscartoes.models.Cartao;
 import com.example.mscartoes.models.ClienteCartao;
+import com.example.mscartoes.services.CartaoService;
 import com.example.mscartoes.services.ClienteCartaoService;
 
 @RestController
@@ -28,23 +30,31 @@ import com.example.mscartoes.services.ClienteCartaoService;
 public class ClienteCartaoController {
 
 	private final Logger logger = Logger.getLogger(ClienteCartaoController.class.getName());
+
 	@Autowired
 	private ClienteCartaoService clienteService;
 
+	@Autowired
+	private ClienteCartaoConverter clienteCartaoConverter;
+
+	@Autowired
+	private CartaoConverter cartaoConverter;
+
+	@Autowired
+	private CartaoService cartaoService;
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity salvar(@RequestBody ClienteCartaoRequest request) {
-		ClienteCartao clienteCartao = request.toModel();
-		ClienteCartao clt = this.clienteService.salvar(clienteCartao);
+	public ClienteCartao salvar(@RequestBody ClienteCartaoDto clienteCartaoDto) {
+		logger.info("Salvando clienteReques ********");
 
-		// Usado para apresentar rotas dinamicas.
-		// EX: http://localhost:8080/clientes?bi=12345LA049
-		URI headerLocation = ServletUriComponentsBuilder
-				.fromCurrentRequest()
-				.query("bi={bi}")
-				.buildAndExpand(clt.getBi())
-				.toUri();
-		return ResponseEntity.created(headerLocation).build();
+		Cartao cartao = cartaoConverter.toModel(clienteCartaoDto);
+		cartao = this.cartaoService.salvar(cartao);
+
+		ClienteCartao clienteCartao = clienteCartaoConverter.toModel(clienteCartaoDto);
+		clienteCartao.setCartao(cartao);
+
+		return this.clienteService.salvar(clienteCartao);
 	}
 
 	@GetMapping

@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -27,6 +30,7 @@ public class ClienteCartao {
 
 	@ManyToOne
 	@JoinColumn(name = "cartao_id")
+	@JsonIgnore
 	private Cartao cartao;
 
 	@Column(name = "limite")

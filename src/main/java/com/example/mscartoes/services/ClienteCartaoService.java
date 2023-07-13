@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.mscartoes.exceptions.ClienteCartaoNotFoundException;
 import com.example.mscartoes.models.ClienteCartao;
+import com.example.mscartoes.repositories.CartaoRepository;
 import com.example.mscartoes.repositories.ClienteCartaoRepository;
 
 @Service
@@ -14,6 +15,9 @@ public class ClienteCartaoService {
 
 	@Autowired
 	private ClienteCartaoRepository clienteRepository;
+
+	@Autowired
+	private CartaoRepository cartaoRepository;
 
 	public ClienteCartao salvar(ClienteCartao cliente) {
 		return this.clienteRepository.save(cliente);
