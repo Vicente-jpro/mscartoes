@@ -24,8 +24,7 @@ import com.example.mscartoes.services.CartaoService;
 import com.example.mscartoes.services.ClienteCartaoService;
 
 @RestController
-@RequestMapping("/clientes-cartao")
-// @CrossOrigin("http://localhost:4200")
+@RequestMapping("/cartoes/clientes")
 public class ClienteCartaoController {
 
 	private final Logger logger = Logger.getLogger(ClienteCartaoController.class.getName());
@@ -77,9 +76,12 @@ public class ClienteCartaoController {
 
 	@GetMapping(params = "bi")
 	@ResponseStatus(HttpStatus.OK)
-	public ClienteCartao getCliente(@RequestParam("bi") String bi) {
+	public ClienteCartaoDto getClienteByBi(@RequestParam("bi") String bi) {
 		logger.info("Listar cliente por BI: " + bi);
-		return this.clienteService.findByBi(bi);
+		ClienteCartao clienteCartao = this.clienteService.findByBi(bi);
+		ClienteCartaoDto clienteCartaoDto = this.clienteCartaoConverter.toDto(clienteCartao);
+
+		return clienteCartaoDto;
 	}
 
 	@DeleteMapping("/{id_cliente}")
