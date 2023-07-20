@@ -1,5 +1,8 @@
 package com.example.mscartoes.converters;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +38,25 @@ public class ClienteCartaoConverter {
                 .cartao(cartaoConverter.toDto(clienteCartao.getCartao()))
                 .build();
 
+    }
+
+    public List<ClienteCartaoDto> toDto(List<ClienteCartao> clienteCartao) {
+
+        List<ClienteCartaoDto> listaCartoes = new ArrayList<>();
+
+        for (ClienteCartao clt : clienteCartao) {
+
+            ClienteCartaoDto clienteCartaoDto = ClienteCartaoDto
+                    .builder()
+                    .id(clt.getId())
+                    .bi(clt.getBi())
+                    .limite(clt.getLimite())
+                    .cartao(cartaoConverter.toDto(clt.getCartao()))
+                    .build();
+
+            listaCartoes.add(clienteCartaoDto);
+        }
+        return listaCartoes;
     }
 
 }

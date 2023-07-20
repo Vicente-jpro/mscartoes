@@ -13,29 +13,29 @@ import com.example.mscartoes.repositories.ClienteCartaoRepository;
 public class ClienteCartaoService {
 
 	@Autowired
-	private ClienteCartaoRepository clienteRepository;
+	private ClienteCartaoRepository clienteCartaoRepository;
 
 	public ClienteCartao salvar(ClienteCartao cliente) {
-		return this.clienteRepository.save(cliente);
+		return this.clienteCartaoRepository.save(cliente);
 	}
 
 	public ClienteCartao getCliente(Integer idCliente) {
-		return this.clienteRepository
+		return this.clienteCartaoRepository
 				.findById(idCliente)
 				.orElseThrow(
 						() -> new ClienteCartaoNotFoundException("Cliente não encontrado. Id invalido :" + idCliente));
 	}
 
-	public ClienteCartao findByBi(String bi) {
-		return this.clienteRepository.findByBi(bi);
+	public List<ClienteCartao> getClienteCartoesByBi(String bi) {
+		return this.clienteCartaoRepository.findAllByBi(bi);
 	}
 
 	public void eliminar(Integer idCliente) {
 		ClienteCartao cliente = this.getCliente(idCliente);
-		this.clienteRepository.delete(cliente);
+		this.clienteCartaoRepository.delete(cliente);
 	}
 
 	public List<ClienteCartao> listarClientes() {
-		return this.clienteRepository.findAll();
+		return this.clienteCartaoRepository.findAll();
 	}
 }

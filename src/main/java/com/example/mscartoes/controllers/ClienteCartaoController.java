@@ -76,10 +76,10 @@ public class ClienteCartaoController {
 
 	@GetMapping(params = "bi")
 	@ResponseStatus(HttpStatus.OK)
-	public ClienteCartaoDto getClienteByBi(@RequestParam("bi") String bi) {
+	public List<ClienteCartaoDto> getCartaoClienteByBi(@RequestParam("bi") String bi) {
 		logger.info("Listar cliente por BI: " + bi);
-		ClienteCartao clienteCartao = this.clienteService.findByBi(bi);
-		ClienteCartaoDto clienteCartaoDto = this.clienteCartaoConverter.toDto(clienteCartao);
+		List<ClienteCartao> clienteCartao = this.clienteService.getClienteCartoesByBi(bi);
+		List<ClienteCartaoDto> clienteCartaoDto = this.clienteCartaoConverter.toDto(clienteCartao);
 
 		return clienteCartaoDto;
 	}
