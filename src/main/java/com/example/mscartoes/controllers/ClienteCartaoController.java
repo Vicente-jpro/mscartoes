@@ -70,14 +70,14 @@ public class ClienteCartaoController {
 	// @ApiResponse(code = 200, message = "Cliente encontrado com sucesso.")
 	@ResponseStatus(HttpStatus.OK)
 	public ClienteCartao getCliente(@PathVariable("id_cliente") Integer IdCliente) {
-
+		logger.info("Buscar cartoes do cliente pelo ID: " + IdCliente);
 		return this.clienteService.getCliente(IdCliente);
 	}
 
 	@GetMapping(params = "bi")
 	@ResponseStatus(HttpStatus.OK)
 	public List<ClienteCartaoDto> getCartaoClienteByBi(@RequestParam("bi") String bi) {
-		logger.info("Listar cliente por BI: " + bi);
+		logger.info("Buscar cartoes do cliente pelo BI: " + bi);
 		List<ClienteCartao> clienteCartao = this.clienteService.getClienteCartoesByBi(bi);
 		List<ClienteCartaoDto> clienteCartaoDto = this.clienteCartaoConverter.toDto(clienteCartao);
 
@@ -89,6 +89,7 @@ public class ClienteCartaoController {
 	// @ApiResponse(code = 200, message = "Cliente encontrado com sucesso.")
 	@ResponseStatus(HttpStatus.OK)
 	public void eliminar(@PathVariable("id_cliente") Integer IdCliente) {
+		logger.info("Eliminar clientes cartoes do cliente pelo BI: " + IdCliente);
 		this.clienteService.eliminar(IdCliente);
 	}
 
