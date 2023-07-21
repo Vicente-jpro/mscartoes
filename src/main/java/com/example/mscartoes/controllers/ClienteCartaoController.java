@@ -44,7 +44,7 @@ public class ClienteCartaoController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ClienteCartaoDto salvar(@RequestBody ClienteCartaoDto clienteCartaoDto) {
-		logger.info("Salvando clienteReques ********");
+		logger.info("Buscar Cliente com os seus cartões.");
 
 		Cartao cartao = cartaoConverter.toModel(clienteCartaoDto);
 		cartao = this.cartaoService.salvar(cartao);
@@ -61,7 +61,7 @@ public class ClienteCartaoController {
 	// @ApiResponse(code = 302, message = "Clientes encontrados com sucesso.")
 	@ResponseStatus(HttpStatus.OK)
 	public List<ClienteCartao> listarClientes() {
-		logger.info("***Buscando clientes***");
+		logger.info("Buscar clientes");
 		return this.clienteService.listarClientes();
 	}
 
