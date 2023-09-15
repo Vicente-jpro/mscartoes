@@ -93,4 +93,10 @@ public class ClienteCartaoController {
 		this.clienteService.eliminar(IdCliente);
 	}
 
+	@GetMapping(params = "renda")
+	public List<Cartao> getCartoesRendaMenorOrIgual(@RequestParam("renda") Long renda) {
+		logger.info("bustar cartão com renda: ");
+		return this.cartaoService.getCartoesRendaMenorOrIgual(renda);
+	}
+
 }
