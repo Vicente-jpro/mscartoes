@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mscartoes.converters.CartaoConverter;
@@ -44,6 +45,12 @@ public class CartaoController {
     public List<Cartao> getCartoes() {
         logger.info("Listar todos os cartoes.");
         return this.cartaoService.getCartoes();
+    }
+
+    @GetMapping("/{id}")
+    public Cartao getCartaoById(@RequestParam("id") Long idCartao) {
+        logger.info("Buscar cartão com id: " + idCartao);
+        return this.cartaoService.getCartaoById(idCartao);
     }
 
 }
