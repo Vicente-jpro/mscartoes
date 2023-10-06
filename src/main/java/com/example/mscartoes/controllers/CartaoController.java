@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,12 +32,6 @@ public class CartaoController {
         logger.info("Salavar cartao");
         Cartao cartao = cartaoConverter.toModel(cartaoDto);
         return this.cartaoService.salvar(cartao);
-    }
-
-    @GetMapping("/{bi}")
-    public Cartao geCartao(@PathVariable("bi") String bi) {
-        logger.info("Buscar cartão pelo BI");
-        return this.cartaoService.getCartao(bi);
     }
 
     @GetMapping

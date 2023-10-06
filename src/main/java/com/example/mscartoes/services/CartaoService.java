@@ -25,10 +25,6 @@ public class CartaoService {
         return this.cartaoRepository.save(cartao);
     }
 
-    public Cartao getCartao(String bi) {
-        return this.cartaoRepository.findAll().get(0);
-    }
-
     public List<Cartao> getCartoesRendaMenorOrIgual(Long renda) {
         BigDecimal valorRenda = BigDecimal.valueOf(renda);
         return this.cartaoRepository.findByRendaLessThanEqual(valorRenda);
