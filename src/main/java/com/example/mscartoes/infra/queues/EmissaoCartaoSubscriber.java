@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 import com.example.mscartoes.models.Cartao;
 import com.example.mscartoes.models.ClienteCartao;
 import com.example.mscartoes.models.DadosSolicitacaoEmissaoCartao;
-import com.example.mscartoes.repositories.CartaoRepository;
 import com.example.mscartoes.services.CartaoService;
 import com.example.mscartoes.services.ClienteCartaoService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class EmissaoCartaoSubscriber {
@@ -24,7 +24,9 @@ public class EmissaoCartaoSubscriber {
 
     @RabbitListener(queues = "${mq.queues.emissao-cartoes}")
     public void solicitar(@Payload String payload) {
+    	
         try {
+        	log.info("Solcitar cartão.");
             ObjectMapper mapper = new ObjectMapper();
             // Descerialização dos dados
             DadosSolicitacaoEmissaoCartao dados = mapper.readValue(payload, DadosSolicitacaoEmissaoCartao.class);
@@ -36,7 +38,8 @@ public class EmissaoCartaoSubscriber {
             clienteCartao.setLimite(dados.getLimiteLiberado());
 
             clienteCartaoService.salvar(clienteCartao);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
+        	log.error( "Erro ao solicitar cartão: {} ", e.getMessage());
             e.printStackTrace();
         }
     }

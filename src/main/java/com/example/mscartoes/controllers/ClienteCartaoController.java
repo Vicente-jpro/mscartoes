@@ -23,11 +23,12 @@ import com.example.mscartoes.models.ClienteCartao;
 import com.example.mscartoes.services.CartaoService;
 import com.example.mscartoes.services.ClienteCartaoService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/cartoes/clientes")
 public class ClienteCartaoController {
-
-	private final Logger logger = Logger.getLogger(ClienteCartaoController.class.getName());
 
 	@Autowired
 	private ClienteCartaoService clienteService;
@@ -44,7 +45,7 @@ public class ClienteCartaoController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ClienteCartaoDto salvar(@RequestBody ClienteCartaoDto clienteCartaoDto) {
-		logger.info("Buscar Cliente com os seus cartões.");
+		log.info("Buscar Cliente com os seus cartões.");
 
 		Cartao cartao = cartaoConverter.toModel(clienteCartaoDto);
 		cartao = this.cartaoService.salvar(cartao);
@@ -61,7 +62,7 @@ public class ClienteCartaoController {
 	// @ApiResponse(code = 302, message = "Clientes encontrados com sucesso.")
 	@ResponseStatus(HttpStatus.OK)
 	public List<ClienteCartao> listarClientes() {
-		logger.info("Buscar clientes");
+		log.info("Buscar clientes");
 		return this.clienteService.listarClientes();
 	}
 
@@ -70,14 +71,14 @@ public class ClienteCartaoController {
 	// @ApiResponse(code = 200, message = "Cliente encontrado com sucesso.")
 	@ResponseStatus(HttpStatus.OK)
 	public ClienteCartao getCliente(@PathVariable("id_cliente") Integer IdCliente) {
-		logger.info("Buscar cartoes do cliente pelo ID: " + IdCliente);
+		log.info("Buscar cartoes do cliente pelo ID: {}", IdCliente);
 		return this.clienteService.getCliente(IdCliente);
 	}
 
 	@GetMapping(params = "bi")
 	@ResponseStatus(HttpStatus.OK)
 	public List<ClienteCartaoDto> getCartaoClienteByBi(@RequestParam("bi") String bi) {
-		logger.info("Buscar cartoes do cliente pelo BI: " + bi);
+		log.info("Buscar cartoes do cliente pelo BI: " + bi);
 		List<ClienteCartao> clienteCartao = this.clienteService.getClienteCartoesByBi(bi);
 		List<ClienteCartaoDto> clienteCartaoDto = this.clienteCartaoConverter.toDto(clienteCartao);
 
@@ -89,13 +90,13 @@ public class ClienteCartaoController {
 	// @ApiResponse(code = 200, message = "Cliente encontrado com sucesso.")
 	@ResponseStatus(HttpStatus.OK)
 	public void eliminar(@PathVariable("id_cliente") Integer IdCliente) {
-		logger.info("Eliminar clientes cartoes do cliente pelo BI: " + IdCliente);
+		log.info("Eliminar clientes cartoes do cliente pelo BI: {}", IdCliente);
 		this.clienteService.eliminar(IdCliente);
 	}
 
 	@GetMapping(params = "renda")
 	public List<Cartao> getCartoesRendaMenorOrIgual(@RequestParam("renda") Long renda) {
-		logger.info("bustar cartão com renda: ");
+		log.info("bustar cartão com renda: ");
 		return this.cartaoService.getCartoesRendaMenorOrIgual(renda);
 	}
 

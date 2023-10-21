@@ -16,10 +16,12 @@ import com.example.mscartoes.dto.CartaoDto;
 import com.example.mscartoes.models.Cartao;
 import com.example.mscartoes.services.CartaoService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/cartoes")
 public class CartaoController {
-    private final Logger logger = Logger.getLogger(CartaoController.class.getName());
 
     @Autowired
     private CartaoService cartaoService;
@@ -29,20 +31,20 @@ public class CartaoController {
 
     @PostMapping
     public Cartao salvar(@RequestBody CartaoDto cartaoDto) {
-        logger.info("Salavar cartao");
+        log.info("Salavar cartao");
         Cartao cartao = cartaoConverter.toModel(cartaoDto);
         return this.cartaoService.salvar(cartao);
     }
 
     @GetMapping
     public List<Cartao> getCartoes() {
-        logger.info("Listar todos os cartoes.");
+        log.info("Listar todos os cartoes.");
         return this.cartaoService.getCartoes();
     }
 
     @GetMapping("/{id}")
     public Cartao getCartaoById(@RequestParam("id") Long idCartao) {
-        logger.info("Buscar cartão com id: " + idCartao);
+        log.info("Buscar cartão com id: " + idCartao);
         return this.cartaoService.getCartaoById(idCartao);
     }
 
